@@ -22,7 +22,7 @@ function App() {
       upvotes = { video.upvotes }
       downvotes = { video.downvotes }
       comments = { video.comments }
-      />s
+      />
       {/* <iframe
         width="919"
         height="525"

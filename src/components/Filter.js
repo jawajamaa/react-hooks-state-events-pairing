@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Comments from "./Comments"
 
 function Filter({ views,
     dateUploaded,
     upvotes,
     downvotes,
-    comments 
+    comments, 
 }) {
+    const [upVotes, setUpVotes] = useState(9210);
+    const [downVotes, setDownVotes] = useState(185);
+    const [commentsHidden, setCommentsHidden] = useState(false);
 
-
-
+        function handleClick(event) {
+            console.log(event.target.id)
+            if (event.target.id === "thumbsUp") {
+                setUpVotes(upVotes=>upVotes+1);
+            }
+            if (event.target.id === "thumbsDown") {
+                setDownVotes(downVotes=>downVotes+1);
+            } 
+            if (event.target.id === "hideComments") {
+                setCommentsHidden(!commentsHidden);
+            }
+        }
+console.log(commentsHidden)
 
     return (
         <>
@@ -18,16 +32,21 @@ function Filter({ views,
         </div>
         <div>
             <br/>
-            <button>{ upvotes }👍</button><button>{ downvotes }👎</button>
+            <button id = "thumbsUp" onClick = { handleClick }>{ upVotes }👍</button>
+            <button id = "thumbsDown" onClick = { handleClick }>{ downVotes }👎</button>
         </div>
         <div>
             <br/>
-            <button><b><em>Hide Comments</em></b></button>
+            <button id = "hideComments" onClick = { handleClick }>{commentsHidden ? "Show Comments" : "Hide Comments"}</button>
             <hr/>
         </div>
-        <Comments
-        comments = { comments }
-        />
+        <div>
+            {!commentsHidden ? 
+            <Comments
+                comments = { comments } />
+                : null
+            }
+        </div>
         </>
     )
 }
